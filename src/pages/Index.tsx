@@ -51,7 +51,7 @@ const Index = () => {
             </div>
             <div>
               <h1 className="text-xl font-bold text-foreground">NEET ADDA</h1>
-              <p className="text-xs text-muted-foreground">Your path to MBBS starts here</p>
+              <p className="text-xs text-muted-foreground">Your pa</p>
             </div>
           </div>
         </div>
