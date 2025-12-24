@@ -3,44 +3,46 @@ import { Timer, Target, BookOpen } from 'lucide-react';
 
 // NEET 2026 exam date - May 3, 2026 at 2:00 PM IST
 const NEET_DATE = new Date('2026-05-03T14:00:00+05:30');
-
 interface TimeLeft {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
 }
-
 const calculateTimeLeft = (): TimeLeft => {
   const now = new Date();
   const difference = NEET_DATE.getTime() - now.getTime();
-
   if (difference <= 0) {
-    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+    return {
+      days: 0,
+      hours: 0,
+      minutes: 0,
+      seconds: 0
+    };
   }
-
   return {
     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((difference / (1000 * 60)) % 60),
-    seconds: Math.floor((difference / 1000) % 60),
+    hours: Math.floor(difference / (1000 * 60 * 60) % 24),
+    minutes: Math.floor(difference / (1000 * 60) % 60),
+    seconds: Math.floor(difference / 1000 % 60)
   };
 };
-
 const CountdownTimer = () => {
   // Initialize with calculated value immediately to avoid flash of 0s
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => calculateTimeLeft());
-
   useEffect(() => {
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
-
     return () => clearInterval(timer);
   }, []);
-
-  const TimeBlock = ({ value, label }: { value: number; label: string }) => (
-    <div className="flex flex-col items-center">
+  const TimeBlock = ({
+    value,
+    label
+  }: {
+    value: number;
+    label: string;
+  }) => <div className="flex flex-col items-center">
       <div className="relative">
         <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-xl bg-card/80 backdrop-blur-sm shadow-card flex items-center justify-center border border-primary/20">
           <span className="text-2xl sm:text-3xl font-bold text-primary">
@@ -52,14 +54,11 @@ const CountdownTimer = () => {
       <span className="text-xs sm:text-sm text-primary-foreground/80 mt-2 font-medium uppercase tracking-wider">
         {label}
       </span>
-    </div>
-  );
-
-  return (
-    <div className="gradient-hero rounded-2xl p-6 sm:p-8 shadow-soft animate-slide-up">
+    </div>;
+  return <div className="gradient-hero rounded-2xl p-6 sm:p-8 shadow-soft animate-slide-up">
       <div className="flex items-center justify-center gap-3 mb-6">
         <Target className="w-6 h-6 sm:w-8 sm:h-8 text-accent animate-pulse-glow rounded-full" />
-        <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground">NEET 2026 Countdown</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-primary-foreground">NEET 2026 Countdown Timer</h2>
         <BookOpen className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
       </div>
       
@@ -79,8 +78,6 @@ const CountdownTimer = () => {
         <Timer className="w-4 h-4 inline-block mr-1" />
         Exam Date: 3rd May, 2026 at 2:00 PM IST
       </p>
-    </div>
-  );
+    </div>;
 };
-
 export default CountdownTimer;

@@ -13,32 +13,26 @@ import SubjectTracker from '@/components/SubjectTracker';
 import RevisionReminder from '@/components/RevisionReminder';
 import NotificationPrompt from '@/components/NotificationPrompt';
 import { useNotifications } from '@/hooks/useNotifications';
-
 const Index = () => {
   const [activeTab, setActiveTab] = useState('todo');
-  
+
   // Initialize notifications
   useNotifications();
-
   const renderContent = () => {
     switch (activeTab) {
       case 'todo':
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <TodoList />
             <RevisionReminder />
-          </div>
-        );
+          </div>;
       case 'coaching':
         return <CoachingAttendance />;
       case 'study':
-        return (
-          <div className="space-y-6">
+        return <div className="space-y-6">
             <StudyHours />
             <SubjectTracker />
             <WeeklyGoals />
-          </div>
-        );
+          </div>;
       case 'water':
         return <WaterToSun />;
       case 'stats':
@@ -47,9 +41,7 @@ const Index = () => {
         return <TodoList />;
     }
   };
-
-  return (
-    <div className="min-h-screen bg-background pb-24">
+  return <div className="min-h-screen bg-background pb-24">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-background/80 backdrop-blur-lg border-b border-border">
         <div className="max-w-2xl mx-auto px-4 py-4">
@@ -58,7 +50,7 @@ const Index = () => {
               <Stethoscope className="h-6 w-6 text-primary-foreground" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-foreground">NEET 2026 Tracker</h1>
+              <h1 className="text-xl font-bold text-foreground">NEET ADDA</h1>
               <p className="text-xs text-muted-foreground">Your path to MBBS starts here</p>
             </div>
           </div>
@@ -84,8 +76,6 @@ const Index = () => {
       
       {/* Notification Prompt */}
       <NotificationPrompt />
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
